@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "edu.eci.arsw.wellness.gateway";
+option java_outer_classname = "CommonProto";
+
+message Empty {
+}
+
+message Student {
+  string id = 1;
+  string name = 2;
+  string institutionalEmail = 3;
+}
+
+message StudentRequest {
+  string studentId = 1;
+}
+
+enum ServiceType {
+  SERVICE_TYPE_UNSPECIFIED = 0;
+  MEDICINE = 1;
+  PSYCHOLOGY = 2;
+  DENTISTRY = 3;
+}

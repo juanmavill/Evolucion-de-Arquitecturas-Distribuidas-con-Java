@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+import "common.proto";
+
+option java_multiple_files = true;
+option java_package = "edu.eci.arsw.wellness.gateway";
+option java_outer_classname = "AppointmentGatewayProto";
+
+service AppointmentService {
+  rpc RequestAppointment (AppointmentRequest) returns (AppointmentResponse);
+  rpc CancelAppointment (CancelRequest) returns (CancelResponse);
+  rpc GetAppointments (StudentRequest) returns (AppointmentList);
+}
+
+message Appointment {
+  string id = 1;
+  string studentId = 2;
+  ServiceType serviceType = 3;
+  string date = 4;
+  AppointmentStatus status = 5;
+}
+
+enum AppointmentStatus {
+  APPOINTMENT_STATUS_UNSPECIFIED = 0;
+  REQUESTED = 1;
+  CANCELLED = 2;
+  ATTENDED = 3;
+}
+
+message AppointmentRequest {
+  string studentId = 1;
+  ServiceType serviceType = 2;
+  string date = 3;
+}
+
+message AppointmentResponse {
+  Appointment appointment = 1;
+  bool success = 2;
+  string message = 3;
+}
+
+message CancelRequest {
+  string appointmentId = 1;
+  string studentId = 2;
+}
+
+message CancelResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message AppointmentList {
+  repeated Appointment appointments = 1;
+}

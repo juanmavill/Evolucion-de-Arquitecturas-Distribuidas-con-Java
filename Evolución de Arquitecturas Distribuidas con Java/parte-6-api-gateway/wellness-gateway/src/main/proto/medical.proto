@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+import "common.proto";
+
+option java_multiple_files = true;
+option java_package = "edu.eci.arsw.wellness.gateway";
+option java_outer_classname = "MedicalProto";
+
+service MedicalService {
+  rpc ListSpecialties (Empty) returns (SpecialtyList);
+  rpc GetSpecialty (SpecialtyRequest) returns (SpecialtyResponse);
+}
+
+message SpecialtyRequest {
+  ServiceType serviceType = 1;
+}
+
+message Specialty {
+  ServiceType serviceType = 1;
+  string name = 2;
+  string location = 3;
+  bool available = 4;
+}
+
+message SpecialtyList {
+  repeated Specialty specialties = 1;
+}
+
+message SpecialtyResponse {
+  Specialty specialty = 1;
+  bool found = 2;
+}
